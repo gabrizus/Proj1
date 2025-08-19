@@ -1,11 +1,59 @@
 <!DOCTYPE html> 
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
-  <title><%= title %></title>
+  <title>Home page</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <h1>Welcome to <%= title %></h1>
+    <nav>
+      <img src="/imgs/" alt="icon">
+      <div class="store-elems">  
+        <a href="/clths-men">Men</a>
+        <a href="/clths-women">Women</a>
+        <a href="/accesories">Accesories</a>
+        <a href="vision">Our Vision</a>
+      </div>
+      <a href="./user/profile"><img src="/imgs/" alt="user"></a>
+    </nav>
+    <div class="slideshow-wrapper">
+      <% for (let i=0; i < images.length; i += 2) { %>
+       <div class="slide">
+        <img src="<%= images[i].url %>" alt="left-img">
+          <% if (images[i + 1]) { %>
+            <img src="<%= images[i + 1].url %>" alt="right-img">
+          <% } %>
+       </div>
+      <% } %>
+      <a class="prev" onclick="changeSlide(-1)">&#10094</a>
+      <a class="next" onclick="changeSlide(+1)">&#10095</a>
+    </div>
+    <div class="dots-container">
+      <% for (let i=0; i < images.length; i+=2) { %>
+        <span class="dot <%= i === 0 ? 'active' : '' %>" onclick="currentSlide(<%= i/2 %>)"></span>
+      <% } %>
+    </div>
+  <div class="icon-row">
+    <div class="icon-container">
+      <h3 class="icon-title">Icon Title</h3>
+      <img src="/imgs/icon_plchold" alt="icon placeholder">
+    </div>
+    <div class="icon-container">
+      <h3 class="icon-title">Icon Title</h3>
+      <img src="/imgs/icon_plchold" alt="icon placeholder">
+    </div>
+    <div class="icon-container">
+      <h3 class="icon-title">Icon Title</h3>
+      <img src="/imgs/icon_plchold" alt="icon placeholder">
+    </div>
+    <div class="icon-container">
+      <h3 class="icon-title">Icon Title</h3>
+      <img src="/imgs/icon_plchold" alt="icon placeholder">
+    </div>
+  </div>
+
+  <h1>Welcome to Home</h1>
+  <script src="/js/slideshow.js"></script>  
 </body>
 </html> 

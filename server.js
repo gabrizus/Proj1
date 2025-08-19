@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv').config();
+const fs = require('fs');
 
 const app = express();
 
@@ -13,10 +14,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Routes
 app.get('/', (req,res) => {
-  res.render('index', {title: 'Home Page'});
-});
+  const imagesDir = path.join(__dirname, "public", "imgs");
+  const imageFiles = fs.readdirSync(imagesDir).filter(file => 
+  /\.(png|jpe?g|gif|webp)$/i.test(file)
+  );
+
+  const images = imageFiles.map(file => ({
+    url: `/imgs/${file}`,
+    alt: path.parse(file).name 
+  }));
+
+
+  res.render('index',{images});
+})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`server running at http://localhost:${PORT}`);
-}); 
+});  
